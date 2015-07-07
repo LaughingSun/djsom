@@ -15,7 +15,7 @@ Remember we are now one server, one data object and that means DIRECT access to 
 
 THe only thing left that is a must have and will not end up being eliminated is a data manager that brings back the most essential requirements of structure, constraints and persistance.  
 
-So hense ajsodm was born.  Like a, but not a cache because it is direct access with all the most core features of data caching and serving.  
+So hense djsom was born.  Like a, but not a cache because it is direct access with all the most core features of data caching and serving.  
 
 I won't kid you though it is more risky, if you server is badly behaved with the data it can mess up all the data.  So you have to keep in mind some some of that in terms of security and how your application is designed.
 
