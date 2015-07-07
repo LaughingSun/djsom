@@ -1,18 +1,18 @@
 
-var JSONDBPlugin = require('./jsondbplugin.js')
+var pluginManager = require('./plugin-manager.js')
   , Collection = require('./collection.js')
-  , _prepareConf = JSONDBPlugin.prepareConf
-  , _prepareInstance = JSONDBPlugin.prepareInstance
+  , _prepareConf = pluginManager.prepareConf
+  , _prepareInstance = pluginManager.prepareInstance
 
-module.exports = JSONDB
+module.exports = AJSODM
 
-; Object.defineProperties(JSONDB, {
+; Object.defineProperties(AJSODM, {
   Collection: { value: Collection }
   , Table: { value: Collection.Table }
   , ResultSet: { value: Collection.Table.ResultSet }
 })
 
-; JSONDBPlugin.inherits(JSONDB, Object, {
+; pluginManager.inherits(AJSODM, Object, {
   // parse: JSONDB_parse
   // , stringify: JSONDB_stringify
   // , loadJson: JSONDB_loadJson
@@ -27,8 +27,8 @@ module.exports = JSONDB
 
 ;
 
-function JSONDB (conf) {
-  var conf = _prepareConf(arguments, 'jsondb', JSONDB, ['load', 'save'])
-  ; if ( ! (this instanceof JSONDB)) throw new Error(['constructor JSONDB called as function'].join(''))
+function AJSODM (conf) {
+  var conf = _prepareConf(arguments, 'ajsodm', AJSODM, ['load', 'save'])
+  ; if ( ! (this instanceof AJSODM)) throw new Error(['constructor AJSODM called as function'].join(''))
   ; _prepareInstance.call(this, conf)
 }

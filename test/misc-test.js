@@ -1,6 +1,6 @@
 
 var assert = require("assert")
-  , Table = require('../src/jsondbtable.js')
+  , Table = require('../src/table.js')
   , ResultSet = Table.ResultSet
   , obj, rs, before, after
 

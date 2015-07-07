@@ -1,12 +1,12 @@
 
-var JSONDBPlugin = require('./jsondbplugin.js')
+var pluginManager = require('./plugin-manager.js')
   , Constrainer = require('./constrainer.js')
-  , _prepareConf = JSONDBPlugin.prepareConf
-  , _prepareInstance = JSONDBPlugin.prepareInstance
+  , _prepareConf = pluginManager.prepareConf
+  , _prepareInstance = pluginManager.prepareInstance
   , _uindex = Date.now() | 0
   , _TableMethods = {
     toArray: Array.prototype.slice
-    , toString: function () { return '[table JSONDBTable]' }
+    , toString: function () { return '[table Table]' }
     , deref: _deref
     , clone: _clone
     , copy: _copy
@@ -23,18 +23,18 @@ var JSONDBPlugin = require('./jsondbplugin.js')
     , constrain: _constrain
   }
 
-; module.exports = JSONDBTable
+; module.exports = Table
 
-; Object.defineProperty(JSONDBTable, 'JSONDBResultSet', {
-  value: JSONDBResultSet, enumerable: true
+; Object.defineProperty(Table, 'ResultSet', {
+  value: ResultSet, enumerable: true
 })
 
-; JSONDBPlugin.inherits(JSONDBTable, Array, _TableMethods, true)
+; pluginManager.inherits(Table, Array, _TableMethods, true)
 
-; JSONDBPlugin.inherits(JSONDBResultSet, Array, {})
+; pluginManager.inherits(ResultSet, Array, {})
 
-function JSONDBTable (data) {
-  var isWrapper = ! (this instanceof JSONDBTable)
+function Table (data) {
+  var isWrapper = ! (this instanceof Table)
     , this_ = isWrapper ? (data instanceof Array ? data : []) : this
     , i = arguments.length - 1
     , conf = (i && arguments[i] instanceof Object) ? arguments[i--] : {}
@@ -50,7 +50,7 @@ function JSONDBTable (data) {
       , enumerable: false, configurable: true, writable: true
     }
   })
-  ; JSONDBPlugin.extend(this_, {
+  ; pluginManager.extend(this_, {
     parse: function _parse (json, cb) {
       return _clone.call(JSON.parse(json, cb || parser), this)
     }
@@ -58,7 +58,7 @@ function JSONDBTable (data) {
       return JSON.stringify(this, cb || stringifier)
     }
   }, false)
-  ; if (isWrapper) JSONDBPlugin.extend(this_, _TableMethods, true)
+  ; if (isWrapper) pluginManager.extend(this_, _TableMethods, true)
   ; if (data && data !== this_) {
     if (typeof data === 'string') data = JSON.parse(data, parser)
     ; _clone.call(data, this_)
@@ -66,13 +66,17 @@ function JSONDBTable (data) {
   return this_
 }
 
-function _stringifier(key, val) {
-  return (val instanceof JSONDBTable) ? val.slice() : val
+function _constrain () { // hook
+  return this
+}
+
+function _stringifier (key, val) {
+  return (val instanceof Table) ? val.slice() : val
 }
 
 function _deref (this_) {
   this_ || (this_ = this)
-  ; return new JSONDBTable(this_.stringify(), this_.name)
+  ; return new Table(this_.stringify(), this_.name)
 }
 
 function _clone (result) {
@@ -130,7 +134,7 @@ function _find (q) {
 }
 
 function _findRS (q) {
-  var result = new JSONDBResultSet(this)
+  var result = new ResultSet(this)
     , x = result.index
     , b, i, j, k, r
   ;
@@ -166,7 +170,7 @@ function _findForEach (cb, q, this_) {
 }
 
 function _remove (q, dst) {
-  var j = (dst || (dst = this instanceof JSONDBTable ? new JSONDBTable : [])).length
+  var j = (dst || (dst = this instanceof Table ? new Table : [])).length
     , b, i, k, r
   ; if (isNaN(j)) throw new Error('cannot move to destination that is not array-like')
   ; for (i in this) {
@@ -183,10 +187,10 @@ function _remove (q, dst) {
 function _removeRS (q, dst) {
   var b, i, j, k, r
   ; if (dst) {
-    if ( ! (dst instanceof JSONDBResultSet && rst.source === this)) {
-      throw new Error('cannot move to non JSONDBResultSet or JSONDBResultSet from different JSONDBTable')
+    if ( ! (dst instanceof ResultSet && rst.source === this)) {
+      throw new Error('cannot move to non ResultSet or ResultSet from different Table')
     }
-  } else dst = new JSONDBResultSet(this)
+  } else dst = new ResultSet(this)
   ; j = dst.length
   ; for (i in this) {
     if (! (r = this[i])) continue
@@ -199,7 +203,7 @@ function _removeRS (q, dst) {
   return dst
 
 
-  var result = new JSONDBResultSet(this)
+  var result = new ResultSet(this)
     , x = result.index
     , j = 0
     , b, i, k, r
@@ -238,7 +242,7 @@ function _findForEachRS (cb, q, this_) {
   ; if (this_ instanceof Function) {
     cb = this_ ; this_ = this
   } else this_ || (this_ = this)
-  ; result = new JSONDBResultSet(this_)
+  ; result = new ResultSet(this_)
   ; x = result.index
   ; j = 0
   ; if (q instanceof Object) {
@@ -260,9 +264,9 @@ function _findForEachRS (cb, q, this_) {
   return result
 }
 
-function JSONDBResultSet (source) {
-  if ( ! (this instanceof JSONDBResultSet)) throw new Error('constructor called as function')
-  if ( ! (source instanceof Array)) throw new Error('JSONDBTable or Array expected (first argument)')
+function ResultSet (source) {
+  if ( ! (this instanceof ResultSet)) throw new Error('constructor called as function')
+  if ( ! (source instanceof Array)) throw new Error('Table or Array expected (first argument)')
   ; this.source = source
   ; this.index = []
 }

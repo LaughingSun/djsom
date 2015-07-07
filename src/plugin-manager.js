@@ -8,7 +8,7 @@ var fs = require('fs')
     var e2m = {}, x, k, v; for (k in MIMETYPES) for (x of MIMETYPES[k])
         (x in e2m) || (e2m[x] = k); return e2m })()
 
-module.exports = JSONDBPlugin
+module.exports = pluginManager
 ;
 
 ; _clone.call({
@@ -18,11 +18,11 @@ module.exports = JSONDBPlugin
   , prepareConf: _prepareConf
   , prepareInstance: _prepareInstance
   , clone: _clone
-}, JSONDBPlugin)
+}, pluginManager)
 
 
 
-function JSONDBPlugin (name) {
+function pluginManager (name) {
 
 }
 
@@ -60,17 +60,17 @@ function _extend (obj, props, enumerable) {
 function _installPlugin (path, cb) {
   var plugin
   try {
-    if ( ! ((plugin = require(path)) instanceof JSONDBPlugin)
+    if ( ! ((plugin = require(path)) instanceof pluginManager)
         || typeof plugin.name !== 'string') {
-      throw new Error(['unsupported JSONDBPlugin: ', path].join(''))
+      throw new Error(['unsupported pluginManager: ', path].join(''))
     }
-    if (plugin.name in JSONDB) {
-      if (plugin !== JSONDB[plugin.name]) {
-        throw new Error(['JSONDBPlugin "', plugin.name, '" conflicts with existing feature or plugin'].join(''))
+    if (plugin.name in AJSODM) {
+      if (plugin !== AJSODM[plugin.name]) {
+        throw new Error(['pluginManager "', plugin.name, '" conflicts with existing feature or plugin'].join(''))
       }
       return
     }
-    JSONDB[plugin.name] = plugin
+    AJSODM[plugin.name] = plugin
   } catch (e) {
     return cb.call(e, plugin)
   }
@@ -120,7 +120,7 @@ function _prepareConf (args, name, class_, reserved) {
   if (fp) {
     conf.path = fp
   } else if (! conf.path && extn) {
-    conf.path = [conf.prepath || './', conf.name || 'jsondb', conf.extn
+    conf.path = [conf.prepath || './', conf.name || 'ajsodm', conf.extn
       || MIMETYPES[conf.type] ||'.json'].join('')
   }
   if (! conf.callback) conf.callback = function (err) { throw new Error(err) }

@@ -1,8 +1,8 @@
 
-var JSONDBPlugin = require('./jsondbplugin.js')
+var pluginManager = require('./plugin-manager.js')
   , Table = require('./table.js')
-  , _prepareConf = JSONDBPlugin.prepareConf
-  , _prepareInstance = JSONDBPlugin.prepareInstance
+  , _prepareConf = pluginManager.prepareConf
+  , _prepareInstance = pluginManager.prepareInstance
 
 module.exports = Collection
 
@@ -25,7 +25,7 @@ module.exports = Collection
 })
 
 function Collection (conf) {
-  var conf = _prepareConf(arguments, 'jsondb.collection', Collection, ['load', 'save'])
+  var conf = _prepareConf(arguments, 'ajsodm.collection', Collection, ['load', 'save'])
   ; if ( ! (this instanceof Collection)) throw new Error(['constructor Collection called as function'].join(''))
   ; _prepareInstance.call(this, conf)
 }

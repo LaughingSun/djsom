@@ -1,5 +1,5 @@
 var assert = require("assert")
-  , JSONDBTable = require('../src/jsondbtable.js')
+  , Table = require('../src/table.js')
   , ProtoProperties = {
     toArray: 'function'
     , toString: 'function'
@@ -40,45 +40,45 @@ var assert = require("assert")
     , forEach: 'function'
     , push: 'function'
   }
-  , array = JSONDBTable(null, 'array')
-  , table = new JSONDBTable(null, 'table')
+  , array = Table(null, 'array')
+  , table = new Table(null, 'table')
 
-describe('JSONDBTable', function() {
+describe('Table', function() {
   var pname, desc
   ; it('should be a function', function(){
-    assert.equal(typeof JSONDBTable, 'function', 'JSONDBTable is missing or not a function');
+    assert.equal(typeof Table, 'function', 'Table is missing or not a function');
   })
   ; for (pname in ProtoProperties) {
     it('should have prototype method #' + pname, function(){
-      assert.equal(typeof JSONDBTable.prototype[pname]
+      assert.equal(typeof Table.prototype[pname]
         , ProtoProperties[pname]
-        , 'missing or incorrect JSONDBTable.prototype.' + pname);
+        , 'missing or incorrect Table.prototype.' + pname);
     })
-    ; if (desc = Object.getOwnPropertyDescriptor(JSONDBTable.prototype, pname)) {
+    ; if (desc = Object.getOwnPropertyDescriptor(Table.prototype, pname)) {
       // console.log(pname, desc)
       ; it('prototype method #' + pname + ' should be enumerable', (function(pname, desc){
         return function() {
           assert.equal(desc.enumerable
             , true
-            , 'non-enumerable property JSONDBTable.prototype.' + pname);
+            , 'non-enumerable property Table.prototype.' + pname);
         }
       })(pname, desc))
     }
   }
 })
 
-; InstanceTest(JSONDBTable(), true)
-; InstanceTest(new JSONDBTable, false)
+; InstanceTest(Table(), true)
+; InstanceTest(new Table, false)
 
 
 function InstanceTest (obj, isWrapper) {
-  var itsTitle = isWrapper ? 'JSONDBTable(...)' : 'new JSONDBTable(...)'
+  var itsTitle = isWrapper ? 'Table(...)' : 'new Table(...)'
     , itsNot = isWrapper ? 'NOT ' : ''
     , act, exp, before, after
   ; describe(itsTitle, function() {
     if (! isWrapper) {
       ; it('should have a name', function(){
-        assert.equal(obj.constructor.name, 'JSONDBTable', 'not named: ' + obj.constructor.name);
+        assert.equal(obj.constructor.name, 'Table', 'not named: ' + obj.constructor.name);
       })
     }
     ; it('should be an Object', function() {
@@ -87,8 +87,8 @@ function InstanceTest (obj, isWrapper) {
     ; it('should be an Array', function() {
       assert(obj instanceof Array, 'fail as Array');
     })
-    ; it('should be ' + itsNot + 'be a JSONDBTable', function() {
-      assert((obj instanceof JSONDBTable) ^ isWrapper, 'fail as ' + itsNot + 'a table');
+    ; it('should be ' + itsNot + 'be a Table', function() {
+      assert((obj instanceof Table) ^ isWrapper, 'fail as ' + itsNot + 'a table');
     })
     ; for (pname in InstProperties) {
       it('should have method #' + pname, function(){
@@ -99,8 +99,8 @@ function InstanceTest (obj, isWrapper) {
     }
 
     ; describe('#toString()', function() {
-      it('should return [table JSONDBTable]', function(){
-        assert.equal(obj.toString(), '[table JSONDBTable]', '#toString() bad result');
+      it('should return [table Table]', function(){
+        assert.equal(obj.toString(), '[table Table]', '#toString() bad result');
       })
     })
 
@@ -227,27 +227,27 @@ function InstanceTest (obj, isWrapper) {
     })
 
     ; describe('#findRS({uid: 1})', function() {
-      it('should return empty JSONDBResultSet', function(){
+      it('should return empty ResultSet', function(){
         var rs = obj.findRS({uid: 1})
-        ; assert(rs === null || rs instanceof JSONDBTable.JSONDBResultSet, '#findRS() did not return null or a JSONDBResultSet');
+        ; assert(rs === null || rs instanceof Table.ResultSet, '#findRS() did not return null or a ResultSet');
         ; assert.deepEqual(rs, null, '#findRS() bad result');
       })
     })
 
     ; describe('#findForEachRS(function(row, i) { return row.uid === i })', function() {
-      it('should return empty JSONDBResultSet', function(){
-        var empty = new JSONDBTable.JSONDBResultSet(obj)
+      it('should return empty ResultSet', function(){
+        var empty = new Table.ResultSet(obj)
           , rs = obj.findForEachRS(function(row, i) { return row.uid === i })
-        ; assert(rs === null || rs instanceof JSONDBTable.JSONDBResultSet, '#findForEachRS() did not return null or an Array');
+        ; assert(rs === null || rs instanceof Table.ResultSet, '#findForEachRS() did not return null or an Array');
         ; assert.deepEqual(rs, empty, '#findForEachRS() bad result');
       })
     })
 
     ; describe('#findForEachRS(function(row, i) { return row.uid === i }, {uid: 1})', function() {
-      it('should return empty JSONDBResultSet', function(){
-        var empty = new JSONDBTable.JSONDBResultSet(obj)
+      it('should return empty ResultSet', function(){
+        var empty = new Table.ResultSet(obj)
           , rs = obj.findForEachRS(function(row, i) { return row.uid === i })
-        ; assert(rs === null || rs instanceof JSONDBTable.JSONDBResultSet, '#findForEachRS() did not return null or an Array');
+        ; assert(rs === null || rs instanceof Table.ResultSet, '#findForEachRS() did not return null or an Array');
         ; assert.deepEqual(rs, empty, '#findForEachRS() bad result');
       }, {uid: 1})
     })
@@ -263,7 +263,7 @@ function InstanceTest (obj, isWrapper) {
       it('should return 1', function(){
         before = obj.slice()
         ; assert.equal(obj.push({uid: 1}), 1, '#push() bad result');
-        ; assert.notDeepEqual(before, obj.slice(), '#push() JSONDBTable still the same');
+        ; assert.notDeepEqual(before, obj.slice(), '#push() Table still the same');
       })
     })
 
@@ -271,7 +271,7 @@ function InstanceTest (obj, isWrapper) {
       it('should return 2', function(){
         before = obj.slice()
         ; assert.equal(obj.unshift({uid: 0}), 2, '#unshift() bad result');
-        ; assert.notDeepEqual(before, obj.slice(), '#unshift() JSONDBTable still the same');
+        ; assert.notDeepEqual(before, obj.slice(), '#unshift() Table still the same');
       })
     })
 
