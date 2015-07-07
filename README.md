@@ -1,5 +1,5 @@
-# ajsodm
-A javascript object data manager
+# djsom
+A data javascript object manager
 
 Most databases use a data store that data is pushed and pulled from.
 
