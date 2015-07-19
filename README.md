@@ -1,7 +1,10 @@
 # djsom
 A data javascript object manager
+<<<<<<< HEAD
 
 (I aplogize for the all the typos and mistakes in this README, I typed it up fast, it will be edited soon)
+=======
+>>>>>>> origin/master
 
 Most databases use a data store that data is pushed and pulled from.
 
