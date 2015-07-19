@@ -25,7 +25,7 @@ module.exports = Collection
 })
 
 function Collection (conf) {
-  var conf = _prepareConf(arguments, 'ajsodm.collection', Collection, ['load', 'save'])
+  var conf = _prepareConf(arguments, 'djsom.collection', Collection, ['load', 'save'])
   ; if ( ! (this instanceof Collection)) throw new Error(['constructor Collection called as function'].join(''))
   ; _prepareInstance.call(this, conf)
 }

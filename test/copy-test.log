@@ -1,0 +1,399 @@
+
+
+  copy.copy
+    √ should be a function
+
+  copy.deep
+    √ should be a function
+
+  copy.clone
+    √ should be a function
+
+  copy.cloneRecursive
+    √ should be a function
+
+  b = copy.copy({"a":1,"b":2,"c":3})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.copy([0,1,2,3,4,5,6,7,8,9])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.copy("constructor:RegExp(/\\w+/gim)")
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.copy([[0,1,2,3,4],[5,6,7,8,9]])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.copy({"first":{"a":1,"b":2,"c":3},"second":{"a":4,"b":5,"c":6}})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.copy([[0,1,2,3,4],[0,1,2,3,4]])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.copy({"first":{"a":1,"b":2,"c":3},"second":{"a":1,"b":2,"c":3}})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.copy([0,1,2,3,4,5,6,7,8,9])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ a should be [-1,0,1,2,3,4,5,6,7,8] after incADecB(a,b)
+    √ b should be [1,2,3,4,5,6,7,8,9,10] after incADecB(a,b)
+
+  b = copy.copy({"a":1,"b":2,"c":3})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ a should be {"a":0,"b":1,"c":2} after incADecB(a,b)
+    √ b should be {"a":2,"b":3,"c":4} after incADecB(a,b)
+
+  b = copy.copy([[0,1,2,3,4],[5,6,7,8,9]])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ a should be [[0,1,2,3,4],[5,6,7,8,9]] after incASDecBS(a,b)
+    √ b should be [[0,1,2,3,4],[5,6,7,8,9]] after incASDecBS(a,b)
+
+  b = copy.copy({"first":{"a":1,"b":2,"c":3},"second":{"a":4,"b":5,"c":6}})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ a should be {"first":{"a":1,"b":2,"c":3},"second":{"a":4,"b":5,"c":6}} after incASDecBS(a,b)
+    √ b should be {"first":{"a":1,"b":2,"c":3},"second":{"a":4,"b":5,"c":6}} after incASDecBS(a,b)
+
+  b = copy.copy([[0,1,2,3,4],[0,1,2,3,4]])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ a should be [[0,1,2,3,4],[0,1,2,3,4]] after incASDecBS(a,b)
+    √ b should be [[0,1,2,3,4],[0,1,2,3,4]] after incASDecBS(a,b)
+
+  b = copy.copy({"first":{"a":1,"b":2,"c":3},"second":{"a":1,"b":2,"c":3}})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ a should be {"first":{"a":1,"b":2,"c":3},"second":{"a":1,"b":2,"c":3}} after incASDecBS(a,b)
+    √ b should be {"first":{"a":1,"b":2,"c":3},"second":{"a":1,"b":2,"c":3}} after incASDecBS(a,b)
+
+  b = copy.deep([0,1,2,3,4,5,6,7,8,9])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.deep({"a":1,"b":2,"c":3})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.deep("constructor:RegExp(/\\w+/gim)")
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.deep([[0,1,2,3,4],[5,6,7,8,9]])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.deep({"first":{"a":1,"b":2,"c":3},"second":{"a":4,"b":5,"c":6}})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.deep([[0,1,2,3,4],[0,1,2,3,4]])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.deep({"first":{"a":1,"b":2,"c":3},"second":{"a":1,"b":2,"c":3}})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.deep([0,1,2,3,4,5,6,7,8,9])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ a should be [-1,0,1,2,3,4,5,6,7,8] after incADecB(a,b)
+    √ b should be [1,2,3,4,5,6,7,8,9,10] after incADecB(a,b)
+
+  b = copy.deep({"a":1,"b":2,"c":3})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ a should be {"a":0,"b":1,"c":2} after incADecB(a,b)
+    √ b should be {"a":2,"b":3,"c":4} after incADecB(a,b)
+
+  b = copy.deep([[0,1,2,3,4],[5,6,7,8,9]])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ a should be [[-1,0,1,2,3],[4,5,6,7,8]] after incASDecBS(a,b)
+    √ b should be [[1,2,3,4,5],[6,7,8,9,10]] after incASDecBS(a,b)
+
+  b = copy.deep({"first":{"a":1,"b":2,"c":3},"second":{"a":4,"b":5,"c":6}})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ a should be {"first":{"a":0,"b":1,"c":2},"second":{"a":3,"b":4,"c":5}} after incASDecBS(a,b)
+    √ b should be {"first":{"a":2,"b":3,"c":4},"second":{"a":5,"b":6,"c":7}} after incASDecBS(a,b)
+
+  b = copy.deep([[0,1,2,3,4],[0,1,2,3,4]])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ a should be [[-2,-1,0,1,2],[-2,-1,0,1,2]] after incASDecBS(a,b)
+    √ b should be [[1,2,3,4,5],[1,2,3,4,5]] after incASDecBS(a,b)
+
+  b = copy.deep({"first":{"a":1,"b":2,"c":3},"second":{"a":1,"b":2,"c":3}})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ a should be {"first":{"a":-1,"b":0,"c":1},"second":{"a":-1,"b":0,"c":1}} after incASDecBS(a,b)
+    √ b should be {"first":{"a":2,"b":3,"c":4},"second":{"a":2,"b":3,"c":4}} after incASDecBS(a,b)
+
+  b = copy.clone([0,1,2,3,4,5,6,7,8,9])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.clone({"a":1,"b":2,"c":3})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.clone("constructor:RegExp(/\\w+/gim)")
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.clone([[0,1,2,3,4],[5,6,7,8,9]])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.clone({"first":{"a":1,"b":2,"c":3},"second":{"a":4,"b":5,"c":6}})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.clone([[0,1,2,3,4],[0,1,2,3,4]])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.clone({"first":{"a":1,"b":2,"c":3},"second":{"a":1,"b":2,"c":3}})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.clone([0,1,2,3,4,5,6,7,8,9])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ a should be [-1,0,1,2,3,4,5,6,7,8] after incADecB(a,b)
+    √ b should be [1,2,3,4,5,6,7,8,9,10] after incADecB(a,b)
+
+  b = copy.clone({"a":1,"b":2,"c":3})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ a should be {"a":0,"b":1,"c":2} after incADecB(a,b)
+    √ b should be {"a":2,"b":3,"c":4} after incADecB(a,b)
+
+  b = copy.clone([[0,1,2,3,4],[5,6,7,8,9]])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ a should be [[-1,0,1,2,3],[4,5,6,7,8]] after incASDecBS(a,b)
+    √ b should be [[1,2,3,4,5],[6,7,8,9,10]] after incASDecBS(a,b)
+
+  b = copy.clone({"first":{"a":1,"b":2,"c":3},"second":{"a":4,"b":5,"c":6}})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ a should be {"first":{"a":0,"b":1,"c":2},"second":{"a":3,"b":4,"c":5}} after incASDecBS(a,b)
+    √ b should be {"first":{"a":2,"b":3,"c":4},"second":{"a":5,"b":6,"c":7}} after incASDecBS(a,b)
+
+  b = copy.clone([[0,1,2,3,4],[0,1,2,3,4]])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ a should be [[-2,-1,0,1,2],[-2,-1,0,1,2]] after incASDecBS(a,b)
+    √ b should be [[2,3,4,5,6],[2,3,4,5,6]] after incASDecBS(a,b)
+
+  b = copy.clone({"first":{"a":1,"b":2,"c":3},"second":{"a":1,"b":2,"c":3}})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ a should be {"first":{"a":-1,"b":0,"c":1},"second":{"a":-1,"b":0,"c":1}} after incASDecBS(a,b)
+    √ b should be {"first":{"a":3,"b":4,"c":5},"second":{"a":3,"b":4,"c":5}} after incASDecBS(a,b)
+
+  b = copy.cloneRecursive([0,1,2,3,4,5,6,7,8,9])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.cloneRecursive({"a":1,"b":2,"c":3})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.cloneRecursive("constructor:RegExp(/\\w+/gim)")
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.cloneRecursive([[0,1,2,3,4],[5,6,7,8,9]])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.cloneRecursive({"first":{"a":1,"b":2,"c":3},"second":{"a":4,"b":5,"c":6}})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.cloneRecursive([[0,1,2,3,4],[0,1,2,3,4]])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.cloneRecursive({"first":{"a":1,"b":2,"c":3},"second":{"a":1,"b":2,"c":3}})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.cloneRecursive([0,1,2,3,4,5,6,7,8,9])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.cloneRecursive({"a":1,"b":2,"c":3})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.cloneRecursive([[0,1,2,3,4],[5,6,7,8,9]])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.cloneRecursive({"first":{"a":1,"b":2,"c":3},"second":{"a":4,"b":5,"c":6}})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.cloneRecursive([[0,1,2,3,4],[0,1,2,3,4]])
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+  b = copy.cloneRecursive({"first":{"a":1,"b":2,"c":3},"second":{"a":1,"b":2,"c":3}})
+    √ should have same constructor 
+    √ should deepEqual __proto__`s 
+    √ should have same __proto__.constructor 
+    √ should not be the same object
+    √ should return as deeply equal
+
+
+  282 passing (125ms)
+

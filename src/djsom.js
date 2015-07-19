@@ -4,15 +4,15 @@ var pluginManager = require('./plugin-manager.js')
   , _prepareConf = pluginManager.prepareConf
   , _prepareInstance = pluginManager.prepareInstance
 
-module.exports = AJSODM
+module.exports = DJSOM
 
-; Object.defineProperties(AJSODM, {
+; Object.defineProperties(DJSOM, {
   Collection: { value: Collection }
   , Table: { value: Collection.Table }
   , ResultSet: { value: Collection.Table.ResultSet }
 })
 
-; pluginManager.inherits(AJSODM, Object, {
+; pluginManager.inherits(DJSOM, Object, {
   // parse: JSONDB_parse
   // , stringify: JSONDB_stringify
   // , loadJson: JSONDB_loadJson
@@ -27,8 +27,8 @@ module.exports = AJSODM
 
 ;
 
-function AJSODM (conf) {
-  var conf = _prepareConf(arguments, 'ajsodm', AJSODM, ['load', 'save'])
-  ; if ( ! (this instanceof AJSODM)) throw new Error(['constructor AJSODM called as function'].join(''))
+function DJSOM (conf) {
+  var conf = _prepareConf(arguments, 'djsom', DJSOM, ['load', 'save'])
+  ; if ( ! (this instanceof DJSOM)) throw new Error(['constructor DJSOM called as function'].join(''))
   ; _prepareInstance.call(this, conf)
 }

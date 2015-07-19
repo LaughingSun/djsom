@@ -1,4 +1,32 @@
-/* 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: constrainer.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: constrainer.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/* 
  * The MIT License
  *
  * Copyright 2015 Erich Horn (laughing sun at github)
@@ -182,8 +210,8 @@ function Constrainer (cons, defs, _goDeep) {
                   ; break
 
                 ; default:
-                  if (d instanceof Object && (
-                    (c[0] === '[' && d.toString() === c) || d.constructor.name === c)) continue
+                  if (d instanceof Object &amp;&amp; (
+                    (c[0] === '[' &amp;&amp; d.toString() === c) || d.constructor.name === c)) continue
               }
             } else if (c instanceof Object) {
               if (d instanceof Object) {
@@ -266,7 +294,7 @@ function _getTypeof (data) {
       ; if ((c = data.constructor) === Object) break
       ; if ((n = c.name)
           || (((m = (s = c.toString()).match(/^function\s+([\w\$]+)\s*\(/))
-              || (m = data.match(/^\[\w+\s(\w+)\]$/))) && (n = m[1]))) {
+              || (m = data.match(/^\[\w+\s(\w+)\]$/))) &amp;&amp; (n = m[1]))) {
         return ['[', n.toLowerCase(), ' ', n, ']'].join('')
       }
   }
@@ -284,15 +312,15 @@ function _isTypeof (type, data, errcb) {
     switch (type) {
       case 'null': return data === null
       ; case 'notNull': return data !== null
-      ; case 'empty': return ! data || (d === 'array' && ! d.length) || false
-      ; case 'notEmpty': return !! (data && (d !== 'array' || d.length)) || false
+      ; case 'empty': return ! data || (d === 'array' &amp;&amp; ! d.length) || false
+      ; case 'notEmpty': return !! (data &amp;&amp; (d !== 'array' || d.length)) || false
       ; case 'numeric': return ! isNaN(data)
       ; case 'notNumeric': case 'NaN': return isNaN(data)
       ; case 'int': return data === (data|0)
       ; case 'notInt': return data !== (data|0)
       ; case 'float': return data === data+0
       ; case 'notFloat': return data !== data+0
-      ; case 'object': return data && d === 'object'
+      ; case 'object': return data &amp;&amp; d === 'object'
       ; case 'notObject': return ! data || d !== 'object'
       ; case 'objectOrNull': return d === 'object'
       ; case 'notObjectOrNull': return d !== 'object'
@@ -313,9 +341,9 @@ function _isTypeof (type, data, errcb) {
 
 function _jsonify (src) {
   var i = arguments.length - 1
-    , errcb = (i && arguments[i]) instanceof Function?arguments[i--]:_throwErr
-    , pcb = (i > 1 && arguments[i]) instanceof Function?arguments[i--]:null
-    , scb = (i && arguments[1]) instanceof Function?arguments[i]:null
+    , errcb = (i &amp;&amp; arguments[i]) instanceof Function?arguments[i--]:_throwErr
+    , pcb = (i > 1 &amp;&amp; arguments[i]) instanceof Function?arguments[i--]:null
+    , scb = (i &amp;&amp; arguments[1]) instanceof Function?arguments[i]:null
     , json
   ; try {
     json = JSON.stringify(src, scb)
@@ -332,109 +360,11 @@ function _clone (src, dst, cb) {
   ; return dst
 }
 
-function _deepCloneObject (src, dst, cb) {
-  var ite = Object.keys(src)
-    , parts = {ite: ite, src: src, dst: dst || (dst = {})}
-    , stack = []
-    , srcCache = [src]
-    , si = srcCache.length
-    , dstCache = [dst]
-    , di = dstCache.length
-    , parts, key, sval, dval, desc
-    , i, k, o, t
-  ; dst.__proto__ = Object.create(src.__proto__)
-
-  if ( ! (src instanceof Object)) return src
-
-  (res = dst || (dst = {})).__proto__ = Object.create(src.__proto__)
-  ; parts = {
-    src: src
-    , dst: dst
-    , ite: Object.getOwnPropertyNames(src)
-  }
-  do {
-    src = parts.src
-    ; dst = parts.dst
-    ; ite = parts.ite
-    ; while (key = ite.shift()) {
-      if ((val = (des = Object.getOwnPropertyDescriptor(src, key)).value) instanceof Object) {
-        stack.push({src: src, dst: dst, ite: ite, key: key, des: des})
-        ; continue
-      }
-      Object.defineProperty(dst, key, desc)
-    }
-  } while (parts = stack.shift())
-
-    ; while (true) {
-      ; while (ite.length) {
-        if (desc = Object.getOwnPropertyDescriptor(src, key = ite.shift())) {
-          if ('value' in desc && (sval = desc.value) instanceof Object) {
-            if ((i = srcCache.indexOf(sval)) < 0) {
-              stack.push(src: src, dst: dst, key: key, ite: ite)
-              ; src = sval
-              ; dst = desc.value
-              ; ite = Object.getOwnPropertyNames(src)
-              ; break
-            }
-            desc.value = dstCache[i]
-          }
-          Object.defineProperty(dst, key, desc)
-          ; continue
-        }
-        dst[key] = src[key]
-      }
-      if ( ! (parts = stack.shift())) break
-      src = parse.src
-      ; dst = parts.dst
-      ; key = parts.key
-      ; desc = parts.desc
-      ; ite = parts.ite
-      ; if (key) {
-          if (desc) Object.defineProperties(dst, key, desc)
-          ; else dst[key] = value
-      }
-    }
-    ;
-
-            }
-            stack.push({src: srcCache[si++] = sval, dst: dst, key: key, des: descdstCache[di++] = dval})
-            desc.value = dval = (dst.hasOwnProperty(key) && 'value' in (t = Object.getOwnPropertyDescriptor(dst, key)))
-                ? t.value : {}
-          }
-          stack.push({src: srcCache[si++] = sval, dst: dst, key: key, des: descdstCache[di++] = dval})
-          } else Object.defineProperty(dst, key, desc)
-        } else throw new Error(['expected descriptor for src[', key, ']'].join(''))
-        if ((sval = src[key]) instanceof Object) {
-          if ((i = srcCache.indexOf(sval)) >= 0) {
-            dst[key] = dstCache[i]
-            ; continue
-          }
-          stack.push(src: sval, dst: (dval = dst.hasOwnProperty(key) ? dst[key] : (dst[key] = {})))
-          ; dval.__proto__ = Object.create(sval.proto)
-          ; continue
-        }
-
-        dst[key] = src[key]
-      }    
-    } while (parts = stack.shift())
-  } else res = src
-
-  return res
-
-  while ( (t = stack.shift()))
-    src = (t = stack.pop()).src
-    ; dst = t.dst
-    ; while (ite.length) {
-      if ((sval = src[key = ite.shift()])) instanceof Object
-          && (i = srcCache.indexOf(sval)) < 0) {
-        (dst[key] = dval = {}).__proto__ = Object.create(val.proto)
-        ; stack.push({src sval, dst: dval})
-        ; continue
-      }
-      dst[key] = val
-    }
-  } while (src = (t = stack.shift()).src &&
-  ; 
+function _deepClone (src, dst, cb) {
+  var k
+  ; dst || (dst = {})
+  ; for (k in src) dst[k] = src[k]
+  ; return dst
 }
 
 function _copy (src, dst) {
@@ -465,3 +395,26 @@ function _deepCopy (src, dst, cb) {
   return dst
 }
 
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Constrainer.html">Constrainer</a></li><li><a href="module-Table.html">Table</a></li></ul><h3>Classes</h3><ul><li><a href="module-Table-Table.html">Table</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.1</a> on Thu Jul 09 2015 14:21:36 GMT+0800 (Malay Peninsula Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 
 var fs = require('fs')
   , path = require('path')
+  , _clone = require('./jsocopy.min.js').clone
   , MIMETYPES = {
     "application/json": '.json'
   }
@@ -64,13 +65,13 @@ function _installPlugin (path, cb) {
         || typeof plugin.name !== 'string') {
       throw new Error(['unsupported pluginManager: ', path].join(''))
     }
-    if (plugin.name in AJSODM) {
-      if (plugin !== AJSODM[plugin.name]) {
+    if (plugin.name in DJSOM) {
+      if (plugin !== DJSOM[plugin.name]) {
         throw new Error(['pluginManager "', plugin.name, '" conflicts with existing feature or plugin'].join(''))
       }
       return
     }
-    AJSODM[plugin.name] = plugin
+    DJSOM[plugin.name] = plugin
   } catch (e) {
     return cb.call(e, plugin)
   }
@@ -120,7 +121,7 @@ function _prepareConf (args, name, class_, reserved) {
   if (fp) {
     conf.path = fp
   } else if (! conf.path && extn) {
-    conf.path = [conf.prepath || './', conf.name || 'ajsodm', conf.extn
+    conf.path = [conf.prepath || './', conf.name || 'djsom', conf.extn
       || MIMETYPES[conf.type] ||'.json'].join('')
   }
   if (! conf.callback) conf.callback = function (err) { throw new Error(err) }
@@ -184,12 +185,5 @@ function _prepareInstance (conf) {
   }
 
   return this
-}
-
-function _clone (result) {
-  var k
-  ; result || (result = {})
-  ; for (k in this) result[k] = this[k]
-  ; return result
 }
 
